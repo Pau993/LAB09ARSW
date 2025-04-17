@@ -350,13 +350,75 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 
 **Preguntas**
 
-* ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
-* ¿Cuál es el propósito del *Backend Pool*?
-* ¿Cuál es el propósito del *Health Probe*?
-* ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
-* ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
-* ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
-* ¿Cuál es el propósito del *Network Security Group*?
+# Despliegue en Azure con Balanceador de Carga y Alta Disponibilidad
+
+## 1. Balanceadores de carga en Azure
+
+Azure ofrece dos tipos principales de balanceadores de carga:
+
+- **Azure Load Balancer (Capa 4 - TCP/UDP)**:
+  - Balanceo de tráfico a nivel de red.
+  - Soporta tráfico interno (privado) y externo (público).
+  - Ideal para servicios de backend, alta disponibilidad y baja latencia.
+
+- **Application Gateway (Capa 7 - HTTP/HTTPS)**:
+  - Balanceo a nivel de aplicación.
+  - Soporta terminación SSL, reglas de enrutamiento, WAF.
+  - Ideal para aplicaciones web.
+
+## 2. SKU del Balanceador de Carga
+
+- **Basic**: configuración simple, sin zonas de disponibilidad, limitada en funcionalidades.
+- **Standard**: alta disponibilidad, soporte para *Availability Zones*, NSG obligatorio.
+
+> En este proyecto se usó **SKU Standard** para asegurar disponibilidad y escalabilidad.
+
+## 3. IP Pública
+
+El balanceador necesita una **IP pública** para ser accesible desde Internet. Esta IP es **zone-redundant**, lo que garantiza disponibilidad incluso si una zona falla.
+
+## 4. Backend Pool
+
+El Backend Pool agrupa las **instancias de máquinas virtuales** que recibirán tráfico desde el balanceador. Las VMs están distribuidas en distintas zonas para garantizar alta disponibilidad.
+
+## 5. Health Probe
+
+El **Health Probe** verifica la salud de las instancias del backend pool mediante consultas periódicas (TCP o HTTP). Si una instancia no responde correctamente, es excluida del tráfico entrante.
+
+## 6. Load Balancing Rule
+
+Esta regla define:
+
+- Puerto frontal: puerto que expone el Load Balancer (ej: 80).
+- Puerto backend: puerto de la aplicación en las VMs (ej: 8080).
+- Sesión persistente:
+  - `None`: sin persistencia.
+  - `Client IP`: fija por IP del cliente.
+  - `Client IP + Protocol`: considera protocolo y cliente.
+
+> Las sesiones persistentes son útiles para mantener estado, pero afectan la escalabilidad al limitar la distribución de tráfico entre instancias.
+
+## 7. Red Virtual (VNet) y Subredes
+
+- Una **Virtual Network** conecta todos los recursos de Azure entre sí.
+- **Subnets** dividen la VNet para segmentar recursos.
+- **Address Space**: espacio de direcciones IP total de la VNet.
+- **Address Range**: rango IP asignado a cada subred.
+
+## 8. Availability Zones
+
+Se seleccionaron **3 zonas de disponibilidad** para distribuir las VMs y tolerar fallas en zonas completas.
+
+- Garantiza alta disponibilidad.
+- Cada zona está físicamente separada.
+
+La IP pública usada es **zone-redundant**, lo que significa que sigue disponible ante fallas zonales.
+
+## 9. Network Security Group (NSG)
+
+El NSG controla el tráfico entrante/saliente a nivel de red. Se definieron reglas para permitir solo tráfico HTTP (puerto 80) y SSH (puerto 22 desde IPs autorizadas).
+
+---
 * Informe de newman 1 (Punto 2)
 * Presente el Diagrama de Despliegue de la solución.
 
