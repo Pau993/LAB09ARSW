@@ -66,11 +66,13 @@ Se hizo:
 ![](images/part1/part1-vm-3000InboudRule.png)
 
 Se hizo:
+
 Verificacion de la regla
 
 ![image](https://github.com/user-attachments/assets/b1d0e217-8346-4607-bea9-0ea6c1b3258f)
 
 Prueba de navegador:
+
 ![image](https://github.com/user-attachments/assets/b0c8ee72-5140-4e69-8a01-7318cf434850)
 
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
