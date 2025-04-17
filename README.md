@@ -86,6 +86,7 @@ Prueba de navegador:
     * 1090000    
 
 Se hizo:
+
 - ![image](https://github.com/user-attachments/assets/6a99ad7e-10b3-4d7c-a567-c5e475b7a059)
 - ![image](https://github.com/user-attachments/assets/d4936b1a-e01a-490c-a183-e89852050e22)
 - ![image](https://github.com/user-attachments/assets/db75887c-3fdf-462c-91d8-cdd78d161634)
@@ -139,6 +140,7 @@ Se cambio el tamaño a B2ms:
 11. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
 
 Se hizo:
+
 ![image](https://github.com/user-attachments/assets/11511ba4-79da-499f-92da-17953814c26d)
 
 ![image](https://github.com/user-attachments/assets/60500b29-1c2f-470e-8780-53842dcc3a94)
@@ -148,6 +150,7 @@ Se hizo:
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
 
 Se hizo:
+
 Sí, ya que al aumentar el tamaño de la VM, se aumenta la cantidad de CPU y memoria RAM, por lo que la aplicación puede procesar más peticiones en menos tiempo.
 
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
@@ -180,28 +183,44 @@ Debemos crear un Inbound port rule para permitir el tráfico de entrada al puert
 
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
 La aplicación tarda tanto porque se calculan todos los números de la secuencia de Fibonacci hasta el número que se desea calcular, y esto toma mucho tiempo.
+
 Antes:
+
 ![image](https://github.com/user-attachments/assets/ddc7db3f-b143-40b9-91b6-6b565461b668)
+
 Despues:
+
 ![image](https://github.com/user-attachments/assets/484cb951-da90-447e-9356-2df9b130d431)
-5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+6. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+
 La función consume esa cantidad de CPU porque se calculan todos los números de la secuencia de Fibonacci hasta el número que se desea calcular, y esto necesita muchos recursos de CPU.
+
 Antes:
+
 ![image](https://github.com/user-attachments/assets/8110e4d2-1bbf-412b-ad39-bec5187a42e8)
+
 Despues:
+
 ![image](https://github.com/user-attachments/assets/d01e278e-4373-4e63-9b13-d59a198eecde)
 
-6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
+7. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
+
 Antes:
+
 ![image](https://github.com/user-attachments/assets/03984581-f016-4622-93f3-bace23c5ca5f)
+
 Despues:
+
 ![image](https://github.com/user-attachments/assets/5b52d4c4-67e1-48d5-8c74-abec9830feed)
+
     * Si hubo fallos documentelos y explique.
 El error ECONNRESET significa que la conexión TCP en su cliente Postman fue cerrada inesperadamente por el servidor o algún intermediario como un proxy. En el contexto de su prueba de Postman, parece que la solicitud a la API "fibonacci" en la iteración 2 fue interrumpida antes de que pudiera completarse.
 
 Este error puede ser causado por varias razones, como un servidor que se cierra inesperadamente, un tiempo de espera de la conexión, problemas de red, etc. Para solucionarlo, puede necesitar investigar el servidor y la red en la que se está ejecutando.
+
 ![image](https://github.com/user-attachments/assets/657e48a6-f107-4015-b2d0-97011e9cae6e)
+
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
 Las VM de la serie B se pueden implementar en diversos tipos de hardware y procesadores, por lo que se proporciona una asignación de ancho de banda competitiva. La serie B se ejecuta en procesadores de 3.ª generación Intel® Xeon® (Ice Lake), Intel® Xeon® (Cascade Lake), Intel® Xeon® (Skylake), Intel® Xeon® (Broadwell) o Intel® Xeon® (Haswell).
 
