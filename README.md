@@ -421,6 +421,7 @@ El NSG controla el tráfico entrante/saliente a nivel de red. Se definieron regl
 ---
 * Informe de newman 1 (Punto 2)
 * Presente el Diagrama de Despliegue de la solución.
+![image](https://github.com/user-attachments/assets/2437203f-6e4a-46a1-9a98-0cdc246fab20)
 
 
 
